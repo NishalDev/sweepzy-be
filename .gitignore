@@ -1,0 +1,34 @@
+# --- Secrets (CRITICAL) ---
+.env
+.env.local
+.env.*.local
+
+# --- Python / Backend ---
+__pycache__/
+*.pyc
+venv/
+.venv/
+.pytest_cache/
+htmlcov/
+site-packages/
+
+# --- Node / Frontend ---
+node_modules/
+.next/
+build/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- System / Editor Junk ---
+.DS_Store
+.vscode/
+.idea/
+*.log
+*.pem
+
+# --- Database ---
+# If you used a local SQLite file for testing
+*.sqlite3
+*.db

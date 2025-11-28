@@ -1,0 +1,49 @@
+# Core FastAPI Server
+fastapi
+uvicorn[standard]
+
+# Database & ORM
+sqlalchemy
+psycopg2-binary  # Use this or asyncpg, not both
+alembic
+pydantic-settings
+geoalchemy2
+shapely
+
+# Authentication & Security
+python-jose[cryptography]
+passlib[bcrypt]  # Use either this or plain bcrypt
+bcrypt==3.2.2
+PyJWT
+
+# Request Handling & Form Parsing
+httpx
+python-multipart
+email-validator
+
+# AI / ML / CV — these are heavy! Keep only what’s necessary
+numpy==2.1.1
+scikit-learn==1.7.0
+pillow==11.1.0
+opencv-python
+faiss-cpu==1.11.0
+onnxruntime
+# Async jobs / Scheduling
+apscheduler
+
+# QR Code
+qrcode[pil]
+
+# Utils
+blinker==1.9.0
+pydantic==2.10.6
+pyproj==3.7.1
+tensorflow-cpu==2.19.0
+keras==3.10.0
+
+imagehash==4.3.2
+gunicorn==23.0.0
+
+#redis
+redis==6.2.0
+rq==2.4.0

@@ -1,0 +1,52 @@
+# Python / build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+pip-log.txt
+
+# Virtualenvs
+venv/
+.venv/
+env/
+.env/
+*.env
+
+# Data / large files
+datasets/
+data/
+notebooks/
+uploads/
+images/
+models/
+*.pt
+*.pth
+*.ckpt
+*.tar.gz
+*.zip
+*.mp4
+*.mov
+*.sqlite3
+
+# Logs, caches
+*.log
+.cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+.tox/
+
+# VCS / CI / editor
+.git/
+.github/
+.vscode/
+.idea/
+.DS_Store
+
+# Fly / deployment / local config
+fly.toml
+.env

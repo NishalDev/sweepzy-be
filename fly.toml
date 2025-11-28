@@ -1,0 +1,67 @@
+# fly.toml for sweepzy-api (updated)
+# fly.toml app configuration file for sweepzy-api
+
+app = "sweepzy-api"
+primary_region = "bom"
+
+[build]
+
+[env]
+  PORT = "8080"
+  # Connection string for Upstash Redis
+  REDIS_URL = "${REDIS_URL}"
+
+# Mount the uploads_data volume only to the web process
+[[mounts]]
+  source = "uploads_data"
+  destination = "/home/appuser/app/uploads"
+  processes = ["web"]
+
+# Define separate processes: web and worker
+[processes]
+  # Web process: FastAPI server
+  web    = "uvicorn main:app --host 0.0.0.0 --port 8080"
+  # Worker process: RQ background worker
+  # worker = "python worker_main.py"
+
+# Service block for the web process (exposes HTTP)
+[[services]]
+  protocol = "tcp"
+  internal_port = 8080
+  processes = ["web"]
+  [services.concurrency]
+    soft_limit = 50
+    hard_limit = 100
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  # Health checks for web
+  [[services.health_checks]]
+    protocol    = "http"
+    path        = "/health"
+    interval    = "10s"
+    timeout     = "8s"
+    grace_period = "30s"
+    method       = "GET"
+
+# Worker process does not bind ports or expect traffic
+# and does not mount the uploads_data volume.
+
+# VM sizing for each process type
+[[vm]]
+  processes = ["web"]
+  memory = "1gb"
+  cpu_kind = "shared"
+  cpus = 1
+
+# [[vm]]
+#   processes = ["worker"]
+#   memory = "2gb"
+#   cpu_kind = "shared"
+#   cpus = 1
